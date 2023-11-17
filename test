@@ -1,0 +1,72 @@
+function Encrypt($plainText, $key) {
+    $plainText = prepareText($plainText);
+    $key = prepareText($key);
+    $matrix = generateKeyMatrix($key);
+
+    $pairs = splitPairs($plainText);
+    $ciphertext = "";
+
+    foreach ($pairs as $pair) {
+        $positions = getCharPositions($pair[0], $pair[1], $matrix);
+        $encryptedPair = encryptPairs($positions, $matrix);
+        $ciphertext .= $encryptedPair;
+    }
+
+    return $ciphertext;
+}
+
+function Decrypt($cipherText, $key) {
+    $cipherText = prepareText($cipherText);
+    $key = prepareText($key);
+    $matrix = generateKeyMatrix($key);
+
+    $pairs = splitPairs($cipherText);
+    $plaintext = "";
+
+    foreach ($pairs as $pair) {
+        $positions = getCharPositions($pair[0], $pair[1], $matrix);
+        $decryptedPair = decryptPairs($positions, $matrix);
+        $plaintext .= $decryptedPair;
+    }
+
+    return $plaintext;
+}
+
+function prepareText($text) {
+    return preg_replace("/[^a-z]/", "", strtolower($text));
+}
+
+function generateKeyMatrix($key) {
+    // Implement logic to generate a 5x5 matrix based on the key
+    // Return the matrix
+}
+
+function splitPairs($text) {
+    // Implement logic to split text into pairs
+    // Return an array of pairs
+}
+
+function getCharPositions($char1, $char2, $matrix) {
+    // Implement logic to find positions of characters in the matrix
+    // Return positions as an array
+}
+
+function encryptPairs($positions, $matrix) {
+    // Implement logic to encrypt pairs based on their positions in the matrix
+    // Return encrypted pair
+}
+
+function decryptPairs($positions, $matrix) {
+    // Implement logic to decrypt pairs based on their positions in the matrix
+    // Return decrypted pair
+}
+
+// Example usage:
+$plainText = "DHIMAS ADITYA";
+$key = "KEY";
+
+$cipherText = Encrypt($plainText, $key);
+echo "Encrypted: $cipherText\n";
+
+$decryptedText = Decrypt($cipherText, $key);
+echo "Decrypted: $decryptedText\n";
